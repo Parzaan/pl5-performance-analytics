@@ -10,10 +10,8 @@ fbref = sd.FBref(leagues="Big 5 European Leagues Combined",
 
 df_standard_raw = fbref.read_player_season_stats(stat_type="standard")
 df_shooting_raw = fbref.read_player_season_stats(stat_type="shooting")
-df_playingtime_raw = fbref.read_player_season_stats(stat_type="playing_time")
 
 df_standard_raw.to_csv("data/raw/standard.csv")
 df_shooting_raw.to_csv("data/raw/shooting.csv")
-df_playingtime_raw.to_csv("data/raw/playingtime.csv")
 
 print("Scraping complete! CSV saved to data/raw/")
