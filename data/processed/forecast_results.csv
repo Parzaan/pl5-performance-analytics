@@ -1,0 +1,265 @@
+player_key,actual_2425,predicted_2425,split
+Alexander Isak_SWE,0.62,0.5420675,train
+Lautaro Martínez_ARG,0.42,0.44514042,train
+Suat Serdar_GER,0.13,0.13722518,train
+Cristian Romero_ARG,0.06,0.04946504,train
+Brais Méndez_ESP,0.18,0.1675924,train
+Mattias Svanberg_SWE,0.22,0.17678308,train
+Fran Beltrán_ESP,0.07,0.06035488,train
+Federico Valverde_URU,0.18,0.16794327,train
+Christoph Baumgartner_AUT,0.11,0.18727925,train
+Nico Elvedi_SUI,0.04,0.03875064,train
+Antonio Rüdiger_GER,0.0,0.035974532,train
+Mateo Kovačić_CRO,0.25,0.08665875,train
+Iñigo Martínez_ESP,0.0,0.03025351,train
+Aïssa Mandi_ALG,0.0,0.008465224,train
+Riccardo Orsolini_ITA,0.58,0.4594536,train
+Ludovic Ajorque_FRA,0.47,0.32561934,train
+Kyle Walker_ENG,0.0,0.034451824,train
+Raphaël Guerreiro_POR,0.23,0.1872083,train
+Serhou Guirassy_GUI,0.62,0.5776408,train
+Scott McTominay_SCO,0.37,0.2655788,train
+Aihen Muñoz_ESP,0.0,0.019574387,train
+Mattéo Guendouzi_FRA,0.03,0.05552848,train
+Gaëtan Laborde_FRA,0.34,0.33654004,train
+Piotr Zieliński_POL,0.0,0.08092252,train
+Emerson_BRA,0.0,0.04283292,train
+Dwight McNeil_ENG,0.26,0.15366271,train
+Andrej Kramarić_CRO,0.26,0.34119278,train
+Marcus Rashford_ENG,0.37,0.32536516,train
+Kieran Trippier_ENG,0.0,0.009906505,train
+Matteo Darmian_ITA,0.15,0.041378364,train
+Lucas Digne_FRA,0.0,0.01729372,train
+Frenkie de Jong_NED,0.16,0.06727463,train
+Cristiano Biraghi_ITA,0.0,0.036436193,train
+Jean-Charles Castelletto_CMR,0.0,0.028616793,train
+Nayef Aguerd_MAR,0.0,0.03711631,train
+James Tarkowski_ENG,0.03,0.03058646,train
+Patrik Schick_CZE,1.07,0.7050588,train
+Alexandre Lacazette_FRA,0.44,0.4162249,train
+Nikola Milenković_SRB,0.14,0.09592182,train
+Vicente Guaita_ESP,0.0,0.005748693,train
+Jordan Pickford_ENG,0.0,0.00749982,train
+Manuel Locatelli_ITA,0.03,0.05191983,train
+Lukas Klostermann_GER,0.05,0.05807172,train
+Boulaye Dia_SEN,0.37,0.27717766,train
+Marc Cucurella_ESP,0.15,0.068384446,train
+Pascal Groß_GER,0.0,0.06812213,train
+José María Giménez_URU,0.0,0.021223444,train
+Mohamed Salah_EGY,0.53,0.4887393,train
+Fabián Ruiz Peña_ESP,0.19,0.11910247,train
+José Luis Gayà_ESP,0.0,0.014607443,train
+Alex Iwobi_NGA,0.27,0.1938718,train
+Maximilian Eggestein_GER,0.06,0.0854942,train
+Aleksandr Golovin_RUS,0.23,0.23421638,train
+Joachim Andersen_DEN,0.0,0.026484933,train
+Kevin Vogt_GER,0.0,0.012598304,train
+Yangel Herrera_VEN,0.16,0.15590711,train
+Mikel Merino_ESP,0.4,0.1995648,train
+Bernardo Silva_POR,0.13,0.1379188,train
+Ludovic Blas_FRA,0.24,0.24115859,train
+Mathías Olivera_URU,0.0,0.032904528,train
+Eduardo Camavinga_FRA,0.08,0.05788468,train
+Babis Lykogiannis_GRE,0.0,0.051969357,train
+Ibrahima Sissoko_MLI,0.07,0.038046565,train
+Theo Hernández_FRA,0.13,0.1572069,train
+Lucas Höler_GER,0.29,0.22716038,train
+Antoine Griezmann_FRA,0.26,0.32850054,train
+Anthony Lopes_POR,0.0,0.005748693,train
+Edmond Tapsoba_BFA,0.0,0.024709387,train
+Dominic Calvert-Lewin_ENG,0.17,0.26192203,train
+Carlos Soler_ESP,0.06,0.08951335,train
+Unai Simón_ESP,0.0,0.02080235,train
+Matthias Ginter_GER,0.07,0.04252628,train
+Giovanni Di Lorenzo_ITA,0.08,0.06281637,train
+Hans Hateboer_NED,0.0,0.027661916,train
+Frederic Guilbert_FRA,0.0,0.029042674,train
+Yunis Abdelhamid_MAR,0.0,0.027256649,train
+Jadon Sancho_ENG,0.15,0.16912116,train
+Jordan Ferri_FRA,0.0,0.010340495,train
+Rodrigo De Paul_ARG,0.13,0.120450854,train
+Amir Rrahmani_KVX,0.03,0.053522117,train
+Rui Silva_POR,0.0,0.00749982,train
+Julian Brandt_GER,0.2,0.18544663,train
+Berat Djimsiti_ALB,0.03,0.028043134,train
+Pau Torres_ESP,0.0,0.03751525,train
+Nicolas Pallois_FRA,0.0,0.007274288,train
+Yuri Berchiche_ESP,0.0,0.048482932,train
+Ellyes Skhiri_TUN,0.04,0.042434882,train
+Alessio Romagnoli_ITA,0.07,0.038840722,train
+Giuseppe Pezzella_ITA,0.0,0.022417895,train
+Niklas Stark_GER,0.0,0.016303157,train
+Trent Alexander-Arnold_ENG,0.11,0.14464931,train
+Jeffrey Gouweleeuw_NED,0.03,0.0058485046,train
+Domingos Duarte_POR,0.05,0.030859832,train
+Adam Marušić_MNE,0.15,0.05575408,train
+Aaron Wan-Bissaka_COD,0.06,0.02080235,train
+Koke_ESP,0.05,0.04611508,train
+Jean-Ricner Bellegarde_HAI,0.11,0.09838573,train
+Álex Moreno_ESP,0.0,0.039676685,train
+Duje Ćaleta-Car_CRO,0.06,0.045436297,train
+Gabriel Magalhães_BRA,0.11,0.06954676,train
+Pierre Højbjerg_DEN,0.07,0.08124188,train
+Alessandro Bastoni_ITA,0.04,0.048328727,train
+Emre Can_GER,0.04,0.054877385,train
+Ferland Mendy_FRA,0.0,0.048894297,train
+John McGinn_SCO,0.04,0.10704341,train
+Álex Berenguer_ESP,0.23,0.17894533,train
+Vinicius Júnior_BRA,0.36,0.37519777,train
+Lukáš Hrádecký_FIN,0.0,0.005748693,train
+Iago Aspas_ESP,0.26,0.23676465,train
+Angeliño_ESP,0.06,0.05452415,train
+Jordan Ayew_GHA,0.22,0.183411,train
+Boubacar Kamara_FRA,0.05,0.045937832,train
+Marvin Friedrich_GER,0.0,0.04513272,train
+Marius Wolf_GER,0.04,0.033650003,train
+Romelu Lukaku_BEL,0.35,0.36490643,train
+Alphonso Davies_CAN,0.06,0.060878024,train
+Ramy Bensebaini_ALG,0.04,0.09097073,train
+Wahbi Khazri_TUN,0.08,0.17024113,train
+Luka Modrić_CRO,0.1,0.10835918,train
+Sergio Herrera_ESP,0.0,0.0051132105,train
+Jon Moncayola_ESP,0.0,0.054120023,train
+Alisson_BRA,0.0,0.00749982,train
+Ashley Young_ENG,0.05,0.055876143,train
+Rolando Mandragora_ITA,0.14,0.120000154,train
+Ederson_BRA,0.0,0.00749982,train
+Ferrán Torres_ESP,0.81,0.57770383,train
+Christopher Trimmel_AUT,0.0,0.017970594,train
+Nemanja Gudelj_SRB,0.0,0.019869735,train
+Benjamin André_FRA,0.0,0.03259332,train
+Robert Andrich_GER,0.11,0.08102454,train
+Boubakary Soumaré_FRA,0.0,0.020581868,train
+Oliver Baumann_GER,0.0,0.005748693,train
+Raphinha_BRA,0.51,0.4116951,train
+Mikel Vesga_ESP,0.0,0.039962314,train
+Rodrigo Bentancur_URU,0.11,0.086270906,train
+Dan Burn_ENG,0.03,0.024397148,train
+Joris Chotard_FRA,0.05,0.036797866,train
+Mattia Zaccagni_ITA,0.2,0.18719138,train
+Mario Pašalić_CRO,0.14,0.17070295,train
+Marcos Llorente_ESP,0.07,0.06335055,train
+Mikel Oyarzabal_ESP,0.2,0.1871871,train
+Ezri Konsa_ENG,0.06,0.05788468,train
+Jules Koundé_FRA,0.07,0.056240585,train
+Manuel Lazzari_ITA,0.0,0.02586352,train
+Marten de Roon_NED,0.12,0.050805062,train
+Timothy Castagne_BEL,0.0,0.05471724,train
+James Maddison_ENG,0.45,0.36629593,train
+Benjamin Pavard_FRA,0.0,0.07027824,train
+Rubén García_ESP,0.19,0.16046934,train
+Ruben Aguilar_FRA,0.08,0.025761463,train
+Erling Haaland_NOR,0.62,0.5922899,train
+Igor Zubeldia_ESP,0.0,0.028978253,train
+Mahdi Camara_FRA,0.17,0.12281268,train
+Iñaki Williams_GHA,0.2,0.25486928,train
+Kevin Akpoguma_NGA,0.0,0.009005844,train
+Igor_BRA,0.0,0.019574387,train
+Dayot Upamecano_FRA,0.1,0.04544578,train
+Kai Havertz_GER,0.43,0.35531795,train
+Gianluca Mancini_ITA,0.06,0.047251884,train
+Bryan Cristante_ITA,0.18,0.112166904,train
+Fikayo Tomori_ENG,0.0,0.04270069,train
+Dejan Kulusevski_SWE,0.26,0.28892913,train
+Kiké_ESP,0.35,0.2960438,train
+Nicolò Barella_ITA,0.11,0.08970344,train
+Rani Khedira_TUN,0.03,0.02587989,train
+Alban Lafont_CIV,0.0,0.02080235,train
+Manuel Neuer_GER,0.0,0.005748693,train
+Łukasz Skorupski_POL,0.0,0.005748693,train
+Leon Goretzka_GER,0.27,0.18539788,train
+İlkay Gündoğan_GER,0.04,0.08336049,train
+Remo Freuler_SUI,0.03,0.03947655,train
+Aridane Hernández_ESP,0.0,0.023871578,train
+Wojciech Szczęsny_POL,0.0,0.005748693,train
+Andy Robertson_SCO,0.0,0.043992575,train
+Pavel Kadeřábek_CZE,0.11,0.08154905,train
+Téji Savanier_FRA,0.0,0.10175373,train
+Baptiste Santamaria_FRA,0.0,0.08487202,train
+Guido Rodríguez_ARG,0.0,0.030125663,train
+Phil Foden_ENG,0.35,0.3553469,train
+Moussa Niakhaté_SEN,0.0,0.034604944,train
+Diogo Jota_POR,0.45,0.47383177,train
+Álvaro Morata_ESP,0.41,0.43840882,train
+Jan Oblak_SVN,0.0,0.00749982,train
+Rodrygo_BRA,0.28,0.3023404,train
+Lorenzo Pellegrini_ITA,0.06,0.13585922,train
+Abdoulaye Doucouré_MLI,0.11,0.13641474,train
+Samuel Chukwueze_NGA,0.29,0.28751597,train
+Tommaso Augello_ITA,0.0,0.0073479414,train
+Dušan Vlahović_SRB,0.3,0.38157865,train
+Unai López_ESP,0.16,0.107515484,train
+Vincenzo Grifo_ITA,0.3,0.2529242,train
+Robert Lewandowski_POL,0.81,0.658808,train
+Yeray Álvarez_ESP,0.05,0.015569176,train
+Youri Tielemans_BEL,0.09,0.10430446,train
+Hakan Çalhanoğlu_TUR,0.09,0.14010224,train
+Kingsley Coman_FRA,0.35,0.3758039,train
+Alassane Pléa_FRA,0.47,0.36039054,train
+Raúl Albiol_ESP,0.0,0.016945709,train
+Darko Lazović_SRB,0.06,0.09511894,train
+Jordan Veretout_FRA,0.12,0.09333244,train
+Robin Zentner_GER,0.0,0.0051132105,train
+Henrikh Mkhitaryan_ARM,0.04,0.08684328,train
+Daniel Parejo_ESP,0.08,0.0742769,train
+Moses Simon_NGA,0.14,0.16231537,train
+Robin Koch_GER,0.1,0.08325086,train
+Thomas Müller_GER,0.07,0.19882222,train
+Dimitri Foulquier_FRA,0.0,0.014929707,train
+Andre-Frank Zambo Anguissa_CMR,0.19,0.08297957,train
+David Soria_ESP,0.0,0.00749982,train
+Guillermo Maripán_CHI,0.04,0.045630727,train
+Yann Sommer_SUI,0.0,0.005748693,train
+Mats Hummels_GER,0.0,0.031506922,test
+William Saliba_FRA,0.06,0.023313774,test
+Bruno Fernandes_POR,0.15,0.23148036,test
+Achraf Hakimi_MAR,0.17,0.16317254,test
+Aarón Martín_ESP,0.0,0.044704318,test
+Jonathan Tah_GER,0.09,0.036731154,test
+Nélson Semedo_POR,0.0,0.032073986,test
+Youssouf Fofana_FRA,0.04,0.11052012,test
+Mathias Pereira Lage_POR,0.11,0.22299327,test
+Álex Remiro_ESP,0.0,0.00749982,test
+Joshua Kimmich_GER,0.09,0.07736954,test
+Lewis Dunk_ENG,0.0,0.071990855,test
+Adrien Thomasson_FRA,0.1,0.20456667,test
+Borja Mayoral_ESP,0.32,0.33497083,test
+Neal Maupay_FRA,0.35,0.29562414,test
+Nemanja Matić_SRB,0.0,0.019969717,test
+Pervis Estupiñán_ECU,0.04,0.06111917,test
+Granit Xhaka_SUI,0.06,0.082895145,test
+Matthijs de Ligt_NED,0.08,0.073385656,test
+Gianluigi Donnarumma_ITA,0.0,0.02080235,test
+Oriol Romeu_ESP,0.0,0.0268629,test
+James Ward-Prowse_ENG,0.09,0.09075985,test
+Christian Günter_GER,0.08,0.050343577,test
+Arnaud Nordin_FRA,0.23,0.22960521,test
+Saša Lukić_SRB,0.0,0.058784574,test
+Francesco Acerbi_ITA,0.0,0.026586305,test
+Yves Bissouma_MLI,0.13,0.04948617,test
+Weston McKennie_USA,0.08,0.074190706,test
+Philipp Lienhart_AUT,0.03,0.027738305,test
+Maximilian Arnold_GER,0.11,0.08905099,test
+Paulo Dybala_ARG,0.19,0.4449565,test
+Omar Mascarell_EQG,0.05,0.024659809,test
+Marcus Thuram_FRA,0.55,0.4664946,test
+Stefan de Vrij_NED,0.16,0.036625564,test
+Adrien Rabiot_FRA,0.33,0.08686766,test
+Ridle Baku_GER,0.147239263803681,0.07883359,test
+Antonio Sanabria_PAR,0.14,0.36613727,test
+Pierre Lees-Melou_FRA,0.12,0.1511433,test
+Leandro Trossard_BEL,0.28,0.35413077,test
+Rayan Aït-Nouri_ALG,0.12,0.031454507,test
+Kevin De Bruyne_BEL,0.21,0.3143718,test
+Bukayo Saka_ENG,0.26,0.2624478,test
+Casemiro_BRA,0.06,0.13360189,test
+Djené_TOG,0.0,0.005748693,test
+Lucas Paquetá_BRA,0.08,0.09346464,test
+Manuel Akanji_SUI,0.0,0.026997365,test
+Ante Budimir_CRO,0.4,0.5383568,test
+Aurélien Tchouaméni_FRA,0.0,0.06444537,test
+Craig Dawson_ENG,0.0,0.04620009,test
+Rafael Leão_POR,0.31,0.37090892,test
+Mike Maignan_FRA,0.0,0.00749982,test
+Nick Pope_ENG,0.0,0.005748693,test
+Robin Le Normand_ESP,0.04,0.044193804,test
