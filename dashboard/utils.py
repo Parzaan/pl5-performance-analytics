@@ -83,3 +83,34 @@ def filter_players(
     if season:
         out = out[out["season"] == season]
     return out
+
+ELIGIBLE_PATH = Path(__file__).resolve().parent.parent / "data" / "processed" / "phase_c_eligible_players.csv"
+FORECAST_PATH = Path(__file__).resolve().parent.parent / "data" / "processed" / "forecast_results.csv"
+
+
+@st.cache_data
+def load_eligible_players(path: Path = ELIGIBLE_PATH) -> list[str]:
+    """The 264 Phase C eligible players — the only players the forecast view covers."""
+    return pd.read_csv(path)["player_key"].tolist()
+
+
+@st.cache_data
+def load_forecast_results(path: Path = FORECAST_PATH) -> pd.DataFrame:
+    """Predicted vs. actual goals_excl_pk_p90 for the 2024-25 season, from 03_forecasting.ipynb."""
+    return pd.read_csv(path)
+
+HISTORY_PATH = Path(__file__).resolve().parent.parent / "data" / "processed" / "player_seasons_merged.csv"
+PRIOR_SEASONS = ["1920", "2021", "2122", "2223", "2324"]
+
+
+@st.cache_data
+def load_player_history(path: Path = HISTORY_PATH) -> pd.DataFrame:
+    """Player-season rows for the 5 prior seasons used as model input (2019-20 to 2023-24)."""
+    df = pd.read_csv(path, dtype={"season": str})
+    return df[df["season"].isin(PRIOR_SEASONS)]
+
+def format_season_label(season_code: str) -> str:
+    """Convert a compact season code like '1920' into a readable '2019-20' label."""
+    start_year = "20" + season_code[:2]
+    end_year_suffix = season_code[2:]
+    return f"{start_year}-{end_year_suffix}"
