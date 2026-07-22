@@ -29,9 +29,10 @@ from utils import (
 
 st.set_page_config(page_title="PL5 Player Analytics", layout="wide")
 df = load_data()
-all_player_names = sorted(df["player"].unique())
 eligible_players = load_eligible_players()
 eligible_names = {pk.rsplit("_", 1)[0] for pk in eligible_players}
+df = df[df["player"].isin(eligible_names)]
+all_player_names = sorted(df["player"].unique())
 
 if "selected_player_name" not in st.session_state:
     st.session_state.selected_player_name = all_player_names[0]
@@ -95,10 +96,6 @@ if view == "Scouting comparison":
     selected_player = st.selectbox(
         "Player", options=player_names, key="selected_player_name"
     )
-    if selected_player in eligible_names:
-        st.success("Forecast available for this player", icon="✅")
-    else:
-        st.info("Forecast not available for this player — outside the model's evaluation set", icon="ℹ️")
     player_row = filtered[filtered["player"] == selected_player].iloc[0]
 
     # ---------------------------------------------------------------- layout
@@ -159,6 +156,25 @@ else:
         "Model tested across 264 players with 5 complete prior seasons — "
         "explains 58% of the variation in next-season non-penalty goals/90 (test R² = 0.58)."
     )
+    with st.expander("ℹ️ About this model"):
+        st.markdown(
+            "**Data:** Five seasons of performance statistics (2019-20 to 2023-24) "
+            "for 264 players across five European leagues, covering goals, shots, "
+            "minutes played, and related per-90 metrics.\n\n"
+            "**Algorithm:** XGBoost, a gradient-boosted decision tree ensemble. "
+            "The model combines the output of many decision trees, each one "
+            "correcting the errors of those before it, to arrive at a final "
+            "prediction.\n\n"
+            "**Interpreting R² = 0.58:** The model accounts for approximately "
+            "58% of the variation in how players' output changed the following "
+            "season. In practical terms, if all 264 players were ranked by the "
+            "extent of their actual improvement or decline, the model's "
+            "predictions would place most players in approximately the correct "
+            "range — though a meaningful share of the variation remains "
+            "unexplained, reflecting factors such as form, injuries, and role "
+            "changes that fall outside the model's inputs."
+        )
+        st.caption("Note: predictions run slightly high for forwards.")
     forecast_df = load_forecast_results()
     player_display_names = {pk: pk.rsplit("_", 1)[0] for pk in eligible_players}
 
@@ -166,69 +182,62 @@ else:
     st.subheader(f"Selected player: {selected_player}")
     st.caption("Change the player from the Scouting comparison view.")
 
-    matching_pks = [pk for pk, name in player_display_names.items() if name == selected_player]
+    selected_player_key = [
+        pk for pk, name in player_display_names.items() if name == selected_player
+    ][0]
+    player_forecast = forecast_df[forecast_df["player_key"] == selected_player_key]
 
-    if not matching_pks:
-        st.info(
-            f"{selected_player} is outside the model's 264-player evaluation set — "
-            "pick a different player from the Scouting comparison view to see a forecast.",
-            icon="ℹ️",
-        )
+    if player_forecast.empty:
+        st.warning(f"No forecast result found for {selected_player}.")
     else:
-        selected_player_key = matching_pks[0]
-        player_forecast = forecast_df[forecast_df["player_key"] == selected_player_key]
+        row = player_forecast.iloc[0]
+        actual = row["actual_2425"]
+        predicted = row["predicted_2425"]
+        gap = predicted - actual
 
-        if player_forecast.empty:
-            st.warning(f"No forecast result found for {selected_player}.")
-        else:
-            row = player_forecast.iloc[0]
-            actual = row["actual_2425"]
-            predicted = row["predicted_2425"]
-            gap = predicted - actual
+        m1, m2, m3 = st.columns(3)
+        m1.metric("Actual (2024-25)", f"{actual:.2f}")
+        m2.metric("Predicted (2024-25)", f"{predicted:.2f}")
+        m3.metric("Gap", f"{gap:+.2f}", delta=f"{gap:+.2f}")
 
-            m1, m2, m3 = st.columns(3)
-            m1.metric("Actual (2024-25)", f"{actual:.2f}")
-            m2.metric("Predicted (2024-25)", f"{predicted:.2f}")
-            m3.metric("Gap", f"{gap:+.2f}", delta=f"{gap:+.2f}")
+        st.plotly_chart(
+            build_forecast_chart(selected_player, actual, predicted),
+            use_container_width=True,
+        )
 
-            st.plotly_chart(
-                build_forecast_chart(selected_player, actual, predicted),
-                use_container_width=True,
-            )
+        direction = "overshot" if gap > 0 else "undershot"
+        st.caption(
+            f"Using the five prior seasons (2019-20 to 2023-24) as input, the model "
+            f"{direction} {selected_player}'s already-known 2024-25 non-penalty "
+            f"goals/90 by {abs(gap):.2f} ({predicted:.2f} predicted vs. {actual:.2f} actual). "
+            f"This is a retrospective check against a season that already happened, not a "
+            f"live forecast."
+        )
 
-            direction = "overshot" if gap > 0 else "undershot"
-            st.caption(
-                f"Using the five prior seasons (2019-20 to 2023-24) as input, the model "
-                f"{direction} {selected_player}'s already-known 2024-25 non-penalty "
-                f"goals/90 by {abs(gap):.2f} ({predicted:.2f} predicted vs. {actual:.2f} actual). "
-                f"This is a retrospective check against a season that already happened, not a "
-                f"live forecast."
-            )
+        st.divider()
+        abs_gaps = (forecast_df["predicted_2425"] - forecast_df["actual_2425"]).abs()
+        percentile = (abs_gaps <= abs(gap)).mean() * 100
+        st.write(
+            f"**{selected_player}'s prediction miss is smaller than "
+            f"{percentile:.0f}% of all 264 players** in the study — the model "
+            f"predicted them {'more' if percentile >= 50 else 'less'} accurately "
+            f"than most players evaluated."
+        )
+        st.plotly_chart(
+            build_gap_distribution_chart(forecast_df, gap, selected_player),
+            use_container_width=True,
+        )
+        st.caption(
+            "Each bar shows how many players had a miss of that size. "
+            f"The dashed line marks where {selected_player} falls."
+        )
 
-            st.divider()
-            abs_gaps = (forecast_df["predicted_2425"] - forecast_df["actual_2425"]).abs()
-            percentile = (abs_gaps <= abs(gap)).mean() * 100
-            st.write(
-                f"**{selected_player}'s prediction miss is smaller than "
-                f"{percentile:.0f}% of all 264 players** in the study — the model "
-                f"predicted them {'more' if percentile >= 50 else 'less'} accurately "
-                f"than most players evaluated."
-            )
-            st.plotly_chart(
-                build_gap_distribution_chart(forecast_df, gap, selected_player),
-                use_container_width=True,
-            )
-            st.caption(
-                "Each bar shows how many players had a miss of that size. "
-                f"The dashed line marks where {selected_player} falls."
-            )
-
-            st.divider()
-            st.plotly_chart(
-                build_full_forecast_scatter(forecast_df, selected_player_key, selected_player),
-                use_container_width=True,
-            )
-            st.caption(
-                "Every one of the 264 evaluated players. Points on the dashed diagonal "
-                "would mean a perfect prediction."
-            )
+        st.divider()
+        st.plotly_chart(
+            build_full_forecast_scatter(forecast_df, selected_player_key, selected_player),
+            use_container_width=True,
+        )
+        st.caption(
+            "Every one of the 264 evaluated players. Points on the dashed diagonal "
+            "would mean a perfect prediction."
+        )
