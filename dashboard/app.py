@@ -16,6 +16,7 @@ from components import (
     build_full_forecast_scatter,
     build_position_bias_chart,
     build_position_mae_chart,
+    build_global_shap_chart,
 )
 from utils import (
     filter_players,
@@ -28,6 +29,7 @@ from utils import (
     load_position_error_summary,
     load_player_history,
     radar_axis_maxima,
+    get_global_shap_importance,
 )
 
 st.set_page_config(page_title="PL5 Player Analytics", layout="wide")
@@ -178,6 +180,12 @@ else:
             "changes that fall outside the model's inputs."
         )
         st.caption("Note: predictions run slightly high for forwards.")
+        st.markdown("**Which factors matter most, on average, across all evaluated players:**")
+        st.plotly_chart(build_global_shap_chart(get_global_shap_importance()), use_container_width=True)
+        st.caption(
+            "Averaged across all 53 test-set players — this shows what the model "
+            "weighs most heavily overall, not a breakdown for any single player."
+        )
     with st.expander("📊 Model accuracy by position"):
         pos_summary = load_position_error_summary()
         small_sample = pos_summary[pos_summary["n"] < 10]["primary_pos"].tolist()

@@ -280,3 +280,27 @@ def build_shap_chart(top_features: list, player_name: str) -> go.Figure:
         margin=dict(l=150, r=40, t=40, b=40),
     )
     return fig
+
+
+def build_global_shap_chart(top_features: list) -> go.Figure:
+    """Horizontal bar chart of the features with the largest average impact across all evaluated players."""
+    labels = [f[0] for f in top_features][::-1]
+    values = [f[1] for f in top_features][::-1]
+
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        x=values,
+        y=labels,
+        orientation="h",
+        marker_color=LEAGUE_COLOR,
+        text=[f"{v:.3f}" for v in values],
+        textposition="outside",
+    ))
+    fig.update_layout(
+        title="Features with the largest average impact on predictions",
+        xaxis_title="Mean |impact| on predicted goals/90",
+        showlegend=False,
+        height=350,
+        margin=dict(l=150, r=40, t=40, b=40),
+    )
+    return fig

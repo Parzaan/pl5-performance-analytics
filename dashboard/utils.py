@@ -192,3 +192,14 @@ def top_shap_features(player_key: str, n: int = 3):
     pairs = list(zip(feature_names, row))
     pairs.sort(key=lambda p: abs(p[1]), reverse=True)
     return [(clean_feature_label(name), float(val)) for name, val in pairs[:n]]
+
+
+def get_global_shap_importance(n: int = 8):
+    """Mean absolute SHAP impact per feature, aggregated across all 53 test-set players."""
+    shap_data = load_shap_values()
+    shap_values = shap_data["shap_values"]
+    feature_names = shap_data["feature_names"]
+    mean_abs = np.abs(shap_values).mean(axis=0)
+    pairs = list(zip(feature_names, mean_abs))
+    pairs.sort(key=lambda p: p[1], reverse=True)
+    return [(clean_feature_label(name), float(val)) for name, val in pairs[:n]]
