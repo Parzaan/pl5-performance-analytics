@@ -215,3 +215,68 @@ def build_full_forecast_scatter(forecast_df: pd.DataFrame, selected_player_key: 
         margin=dict(l=40, r=20, t=40, b=70),
     )
     return fig
+def build_position_bias_chart(pos_summary: pd.DataFrame) -> go.Figure:
+    """Mean prediction bias (predicted − actual) per position — shows over/under-prediction direction."""
+    colors = [PLAYER_COLOR if v > 0 else LEAGUE_COLOR for v in pos_summary["mean_residual"]]
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        x=pos_summary["primary_pos"],
+        y=pos_summary["mean_residual"],
+        marker_color=colors,
+        text=[f"{v:+.3f}" for v in pos_summary["mean_residual"]],
+        textposition="outside",
+    ))
+    fig.add_hline(y=0, line=dict(color="gray", width=1))
+    fig.update_layout(
+        title="Prediction bias by position (predicted − actual)",
+        xaxis_title="Position",
+        yaxis_title="Mean bias (goals/90)",
+        showlegend=False,
+        height=350,
+    )
+    return fig
+
+
+def build_position_mae_chart(pos_summary: pd.DataFrame) -> go.Figure:
+    """Mean absolute error per position — typical size of the miss, regardless of direction."""
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        x=pos_summary["primary_pos"],
+        y=pos_summary["mae"],
+        marker_color=LEAGUE_COLOR,
+        text=[f"{v:.3f}" for v in pos_summary["mae"]],
+        textposition="outside",
+    ))
+    fig.update_layout(
+        title="Typical prediction miss by position (MAE)",
+        xaxis_title="Position",
+        yaxis_title="Mean absolute error (goals/90)",
+        showlegend=False,
+        height=350,
+    )
+    return fig
+
+def build_shap_chart(top_features: list, player_name: str) -> go.Figure:
+    """Horizontal bar chart of the top features pushing this player's prediction up or down."""
+    labels = [f[0] for f in top_features][::-1]
+    values = [f[1] for f in top_features][::-1]
+    colors = [PLAYER_COLOR if v > 0 else LEAGUE_COLOR for v in values]
+
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        x=values,
+        y=labels,
+        orientation="h",
+        marker_color=colors,
+        text=[f"{v:+.3f}" for v in values],
+        textposition="outside",
+    ))
+    fig.add_vline(x=0, line=dict(color="gray", width=1))
+    fig.update_layout(
+        title=f"{player_name} — top factors behind this prediction",
+        xaxis_title="Impact on predicted goals/90",
+        showlegend=False,
+        height=300,
+        margin=dict(l=150, r=40, t=40, b=40),
+    )
+    return fig

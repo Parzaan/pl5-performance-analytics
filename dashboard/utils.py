@@ -2,6 +2,7 @@
 
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 import streamlit as st
 
@@ -99,6 +100,14 @@ def load_forecast_results(path: Path = FORECAST_PATH) -> pd.DataFrame:
     """Predicted vs. actual goals_excl_pk_p90 for the 2024-25 season, from 03_forecasting.ipynb."""
     return pd.read_csv(path)
 
+POSITION_ERROR_PATH = Path(__file__).resolve().parent.parent / "data" / "processed" / "position_error_summary.csv"
+
+
+@st.cache_data
+def load_position_error_summary(path: Path = POSITION_ERROR_PATH) -> pd.DataFrame:
+    """Per-position mean bias and MAE on the 53 test-set players, from 03_forecasting.ipynb."""
+    return pd.read_csv(path)
+
 HISTORY_PATH = Path(__file__).resolve().parent.parent / "data" / "processed" / "player_seasons_merged.csv"
 PRIOR_SEASONS = ["1920", "2021", "2122", "2223", "2324"]
 
@@ -114,3 +123,72 @@ def format_season_label(season_code: str) -> str:
     start_year = "20" + season_code[:2]
     end_year_suffix = season_code[2:]
     return f"{start_year}-{end_year_suffix}"
+
+SHAP_PATH = Path(__file__).resolve().parent.parent / "data" / "processed" / "shap_values.npz"
+
+STAT_LABELS = {
+    "matches": "Matches played",
+    "starts": "Starts",
+    "minutes": "Minutes played",
+    "goals": "Goals",
+    "assists": "Assists",
+    "goal_contributions": "Goal contributions",
+    "goals_excl_pk": "Goals (non-penalty)",
+    "pk_scored": "Penalties scored",
+    "pk_attempted": "Penalties attempted",
+    "yellow_cards": "Yellow cards",
+    "red_cards": "Red cards",
+    "goals_p90": "Goals/90",
+    "assists_p90": "Assists/90",
+    "goal_contributions_p90": "Goal contributions/90",
+    "goals_excl_pk_p90": "Goals/90 (non-penalty)",
+    "goal_contributions_excl_pk_p90": "Goal contributions/90 (non-penalty)",
+    "shots": "Shots",
+    "shots_on_target": "Shots on target",
+    "shot_accuracy": "Shot accuracy",
+    "shots_p90": "Shots/90",
+    "shots_on_target_p90": "Shots on target/90",
+    "goals_per_shot": "Goals per shot",
+    "goals_per_shot_on_target": "Goals per shot on target",
+    "age": "Age",
+}
+
+
+@st.cache_resource
+def load_shap_values(path: Path = SHAP_PATH) -> dict:
+    """SHAP values for the 53 test-set players, saved from 03_forecasting.ipynb."""
+    data = np.load(path, allow_pickle=True)
+    return {
+        "shap_values": data["shap_values"],
+        "feature_names": data["feature_names"],
+        "player_keys": data["player_keys"],
+    }
+
+
+def clean_feature_label(feature_name: str) -> str:
+    """Turn a raw model column name into a readable label for display."""
+    if feature_name.startswith("league_2324_"):
+        return f"League: {feature_name[len('league_2324_'):]}"
+    if feature_name.startswith("primary_pos_"):
+        return f"Position: {feature_name[len('primary_pos_'):]}"
+    for season in PRIOR_SEASONS:
+        suffix = f"_{season}"
+        if feature_name.endswith(suffix):
+            stat = feature_name[: -len(suffix)]
+            stat_label = STAT_LABELS.get(stat, stat.replace("_", " ").title())
+            return f"{stat_label} ({format_season_label(season)})"
+    return feature_name.replace("_", " ").title()
+
+
+def top_shap_features(player_key: str, n: int = 3):
+    """Top-n features by absolute SHAP impact for one test-set player, or None if unavailable."""
+    shap_data = load_shap_values()
+    player_keys = shap_data["player_keys"]
+    matches = [i for i, pk in enumerate(player_keys) if pk == player_key]
+    if not matches:
+        return None
+    row = shap_data["shap_values"][matches[0]]
+    feature_names = shap_data["feature_names"]
+    pairs = list(zip(feature_names, row))
+    pairs.sort(key=lambda p: abs(p[1]), reverse=True)
+    return [(clean_feature_label(name), float(val)) for name, val in pairs[:n]]

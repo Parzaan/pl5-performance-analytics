@@ -14,6 +14,8 @@ from components import (
     build_forecast_chart,
     build_gap_distribution_chart,
     build_full_forecast_scatter,
+    build_position_bias_chart,
+    build_position_mae_chart,
 )
 from utils import (
     filter_players,
@@ -23,6 +25,7 @@ from utils import (
     load_data,
     load_eligible_players,
     load_forecast_results,
+    load_position_error_summary,
     load_player_history,
     radar_axis_maxima,
 )
@@ -175,6 +178,27 @@ else:
             "changes that fall outside the model's inputs."
         )
         st.caption("Note: predictions run slightly high for forwards.")
+    with st.expander("📊 Model accuracy by position"):
+        pos_summary = load_position_error_summary()
+        small_sample = pos_summary[pos_summary["n"] < 10]["primary_pos"].tolist()
+        if small_sample:
+            st.caption(
+                f"⚠️ {', '.join(small_sample)} has very few test players (under 10) — "
+                "treat that position's numbers as a rough signal, not a firm conclusion."
+            )
+        bias_col, mae_col = st.columns(2)
+        with bias_col:
+            st.plotly_chart(build_position_bias_chart(pos_summary), use_container_width=True)
+            st.caption(
+                "Red bars: the model tends to predict higher than reality for that position. "
+                "Blue bars: it tends to predict lower. The closer to zero, the less biased."
+            )
+        with mae_col:
+            st.plotly_chart(build_position_mae_chart(pos_summary), use_container_width=True)
+            st.caption(
+                "How far off a typical prediction is for that position, regardless of direction."
+            )
+    st.divider()
     forecast_df = load_forecast_results()
     player_display_names = {pk: pk.rsplit("_", 1)[0] for pk in eligible_players}
 
@@ -213,7 +237,6 @@ else:
             f"This is a retrospective check against a season that already happened, not a "
             f"live forecast."
         )
-
         st.divider()
         abs_gaps = (forecast_df["predicted_2425"] - forecast_df["actual_2425"]).abs()
         percentile = (abs_gaps <= abs(gap)).mean() * 100
